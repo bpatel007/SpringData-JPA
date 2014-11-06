@@ -6,6 +6,8 @@
  **/
 package com.saanvi.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.saanvi.entity.User;
@@ -15,6 +17,12 @@ import com.saanvi.entity.User;
  *
  */
 public interface UserRepository extends JpaRepository<User, Long> {
+	
+	public List<User> findByFirstName(String firstName);
+	
+	public List<User> findByLastName(String lastName);
+	
+	public User findByFirstNameOrLastName(String firstName, String lastName);
 	
 	
 

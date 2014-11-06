@@ -40,8 +40,13 @@ public class UserServiceTest {
     public void setUp() {
     log.debug("setup method called....");
     }
+    
+    @Test
+    public void init(){
+    	log.debug("init method called...");
+    }
 	
-	@Test
+	//@Test
 	public void save(){
 		User user = new User();
 		

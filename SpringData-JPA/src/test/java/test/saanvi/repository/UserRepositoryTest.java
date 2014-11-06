@@ -7,7 +7,9 @@
 package test.saanvi.repository;
 
 import java.util.Date;
+import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,14 +29,17 @@ import com.saanvi.repository.UserRepository;
 @ContextConfiguration(classes = {JPAConfig.class})
 public class UserRepositoryTest {
 	
+	
+	private static final Logger log = Logger.getLogger(UserRepositoryTest.class);
+	
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Test
+	//@Test
 	public void saveUser(){
 		User user = new User();
-		user.setFirstName("Nishant");
-		user.setLastName("Patel");
+		user.setFirstName("Ramesh");
+		user.setLastName("Soni");
 		user.setCreationDate(new Date());
 		userRepository.save(user);
 		Assert.assertNotNull(user.getId());
@@ -43,7 +48,32 @@ public class UserRepositoryTest {
 	@Test
 	public void testfindUser(){
 		Assert.assertNotNull(userRepository.findOne(1L));
+		
 	}
+	
+	
+	@Test
+	public void testFindByFirstName(){
+		List<User> userList = userRepository.findByFirstName("Nishant");
+		if(userList.size() > 0){
+			log.debug("RESULT by FirstName := "+userList.get(0).getFirstName() + " - "+ userList.get(0).getLastName());
+		}
+		
+		Assert.assertNotNull(userList);
+		
+	}
+	
+	@Test
+	public void testFindByLastName(){
+		List<User> userList = userRepository.findByLastName("Soni");
+		if(userList.size() > 0){
+			log.debug("RESULT by LastName := "+userList.get(0).getFirstName() + " - "+ userList.get(0).getLastName());
+		}
+		
+		Assert.assertNotNull(userList);
+		
+	}
+	
 	
 	
 	
